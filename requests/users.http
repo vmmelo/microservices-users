@@ -1,12 +1,4 @@
-GET {{host}}
-
-###
-
 GET {{host}}/users
-
-###
-
-GET {{host}}/users/6488a2bb-9c25-486a-addb-349b3056f695
 
 ###
 
@@ -15,10 +7,14 @@ Content-Type: application/json
 
 {
   "id": "6488a2bb-9c25-486a-addb-349b3056f695",
-  "code": "Liv005",
-  "name": "Book is on the table",
-  "price": 100
+  "name": "Victor Miranda",
+  "email": "vmmelo1@gmail.com",
+  "password": 123456
 }
+
+###
+
+GET {{host}}/users/6488a2bb-9c25-486a-addb-349b3056f695
 
 ###
 
@@ -26,13 +22,16 @@ PUT {{host}}/users/6488a2bb-9c25-486a-addb-349b3056f695
 Content-Type: application/json
 
 {
-  "code": "Liv002",
-  "name": "Book is on the table 2",
-  "price": 200
+  "name": "Victor Miranda de Melo"
 }
 
 ###
 
 DELETE {{host}}/users/6488a2bb-9c25-486a-addb-349b3056f695
+
+###
+
+
+PATCH {{host}}/users/restore/6488a2bb-9c25-486a-addb-349b3056f695
 
 ###
