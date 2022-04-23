@@ -1,0 +1,38 @@
+GET {{host}}
+
+###
+
+GET {{host}}/users
+
+###
+
+GET {{host}}/users/6488a2bb-9c25-486a-addb-349b3056f695
+
+###
+
+POST {{host}}/users
+Content-Type: application/json
+
+{
+  "id": "6488a2bb-9c25-486a-addb-349b3056f695",
+  "code": "Liv005",
+  "name": "Book is on the table",
+  "price": 100
+}
+
+###
+
+PUT {{host}}/users/6488a2bb-9c25-486a-addb-349b3056f695
+Content-Type: application/json
+
+{
+  "code": "Liv002",
+  "name": "Book is on the table 2",
+  "price": 200
+}
+
+###
+
+DELETE {{host}}/users/6488a2bb-9c25-486a-addb-349b3056f695
+
+###
