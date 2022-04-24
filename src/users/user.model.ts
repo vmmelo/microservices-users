@@ -12,14 +12,14 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: number;
 
-  @Column()
+  @Column('varchar', { unique: true })
   email: string;
 
   @Column('varchar', { length: 255 })
   name: string;
 
   @Column({ type: 'varchar' })
-  password: number;
+  password: string;
 
   // Add this column to your entity!
   @DeleteDateColumn()
