@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.model';
+import { isUUID } from '@nestjs/common/utils/is-uuid';
 
 @Injectable()
 export class UsersService {
@@ -14,8 +15,11 @@ export class UsersService {
   }
 
   findOne(id: string): Promise<User> {
+    const conditions = isUUID(id)
+      ? [{ id }]
+      : [{ email: id }, { username: id }];
     return this.usersRepository.findOne({
-      where: [{ email: id }, { id: id }, { username: id }],
+      where: conditions,
       withDeleted: true,
     });
   }
