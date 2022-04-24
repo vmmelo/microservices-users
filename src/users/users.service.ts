@@ -14,7 +14,10 @@ export class UsersService {
   }
 
   findOne(id: string): Promise<User> {
-    return this.usersRepository.findOne(id, { withDeleted: true });
+    return this.usersRepository.findOne({
+      where: [{ email: id }, { id: id }, { username: id }],
+      withDeleted: true,
+    });
   }
 
   async create(user: User) {

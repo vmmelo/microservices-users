@@ -1,0 +1,10 @@
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "username": "victor.miranda",
+  "password": "123456"
+}
+
+###
+
