@@ -21,8 +21,8 @@ export class UsersController {
   }
 
   @Get(':id')
-  async details(@Param() params): Promise<User> {
-    return await this.usersService.details(params?.id);
+  async findOne(@Param() params): Promise<User> {
+    return await this.usersService.findOne(params?.id);
   }
 
   @Post()

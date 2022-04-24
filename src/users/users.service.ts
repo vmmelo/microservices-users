@@ -13,7 +13,7 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  details(id: string): Promise<User> {
+  findOne(id: string): Promise<User> {
     return this.usersRepository.findOne(id, { withDeleted: true });
   }
 
