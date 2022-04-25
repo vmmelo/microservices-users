@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersController } from './users/users.controller';
 import { UsersService } from './users/users.service';
 import { User } from './users/user.model';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { User } from './users/user.model';
       autoLoadEntities: true,
     }),
     TypeOrmModule.forFeature([User]),
+    ConfigModule.forRoot(),
   ],
   controllers: [AppController, UsersController],
   providers: [AppService, UsersService],
