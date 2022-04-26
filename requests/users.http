@@ -1,9 +1,27 @@
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "username": "victor.miranda",
+  "password": "123456"
+}
+
+> {%
+client.global.set("auth_token", response.body.access_token);
+client.log('token: ' + response.body.access_token)
+%}
+
+###
+
 GET {{host}}/users
+Authorization: Bearer {{auth_token}}
 
 ###
 
 POST {{host}}/users
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
 
 {
   "id": "6488a2bb-9c25-486a-addb-349b3056f695",
@@ -15,11 +33,13 @@ Content-Type: application/json
 ###
 
 GET {{host}}/users/6488a2bb-9c25-486a-addb-349b3056f695
+Authorization: Bearer {{auth_token}}
 
 ###
 
 PUT {{host}}/users/6488a2bb-9c25-486a-addb-349b3056f695
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "name": "Victor Miranda de Melo"
@@ -28,10 +48,12 @@ Content-Type: application/json
 ###
 
 DELETE {{host}}/users/6488a2bb-9c25-486a-addb-349b3056f695
+Authorization: Bearer {{auth_token}}
 
 ###
 
 
 PATCH {{host}}/users/restore/6488a2bb-9c25-486a-addb-349b3056f695
+Authorization: Bearer {{auth_token}}
 
 ###
