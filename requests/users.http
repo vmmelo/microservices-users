@@ -9,7 +9,6 @@ Authorization: Bearer {{auth_token}}
 
 
 {
-  "id": "6488a2bb-9c25-486a-addb-349b3056f695",
   "name": "Victor Miranda",
   "email": "vmmelo1@gmail.com",
   "password": "123456"
