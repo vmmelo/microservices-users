@@ -1,5 +1,12 @@
 import { Controller } from '@nestjs/common';
-import { EventPattern, MessagePattern } from '@nestjs/microservices';
+import {
+  Ctx,
+  EventPattern,
+  MessagePattern,
+  Payload,
+  RmqContext,
+} from '@nestjs/microservices';
+import { EmailContent } from './entities/emailContent.entity';
 
 @Controller()
 export class AppController {
@@ -15,8 +22,19 @@ export class AppController {
   }
 
   @EventPattern('user-registered')
-  async handleUserRegistered(data: Record<string, unknown>) {
-    console.log(data);
-    console.log(`EMAIL ENVIADO PARA ${data.email}`);
+  async handleUserRegistered(
+    @Payload() data: EmailContent,
+    @Ctx() context: RmqContext,
+  ) {
+    try {
+      const channel = context.getChannelRef();
+      const originalMsg = context.getMessage();
+      setTimeout(() => {
+        console.log(`EMAIL ENVIADO PARA ${data?.email}`);
+        channel.ack(originalMsg);
+      }, Math.floor(Math.random() * 5000));
+    } catch (e) {
+      console.error(e);
+    }
   }
 }
