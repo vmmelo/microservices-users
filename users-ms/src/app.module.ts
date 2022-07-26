@@ -3,16 +3,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersController } from './users/users.controller';
-import { UsersService } from './users/users.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
-    AuthModule,
-    UsersModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -28,8 +26,10 @@ import { UsersModule } from './users/users.module';
       }),
       inject: [ConfigService],
     }),
+    AuthModule,
+    UsersModule,
   ],
-  controllers: [AppController, UsersController],
-  providers: [AppService, UsersService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

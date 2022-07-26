@@ -1,13 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
+    @Inject('EMAIL_SERVICE') private client: ClientProxy,
   ) {}
 
   async validateUser(username: string, pass: string): Promise<any> {
