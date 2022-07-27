@@ -10,7 +10,7 @@ Authorization: Bearer {{auth_token}}
 
 {
   "name": "Victor Miranda",
-  "email": "vmmelo7@gmail.com",
+  "email": "vmmelo3@gmail.com",
   "password": "123456"
 }
 

@@ -7,20 +7,22 @@ import {
   Patch,
   Post,
   Put,
-  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { Pagination } from '../paginate';
 
-@UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Get()
-  async listAll(): Promise<User[]> {
-    return await this.usersService.getAll();
+  async listAll(@Request() request): Promise<Pagination<User>> {
+    return await this.usersService.getAll({
+      limit: request.query.hasOwnProperty('limit') ? request.query.limit : 20,
+      page: request.query.hasOwnProperty('page') ? request.query.page : 0,
+    });
   }
 
   @Get(':id')

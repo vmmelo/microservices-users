@@ -21,7 +21,7 @@ export class User {
   @Column('varchar', { length: 16, nullable: true })
   username: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', select: false })
   password: string;
 
   // Add this column to your entity!
