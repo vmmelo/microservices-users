@@ -5,6 +5,7 @@ import { User } from './user.entity';
 import * as bcrypt from 'bcrypt';
 import { isUUID } from '@nestjs/common/utils/is-uuid';
 import { ClientProxy } from '@nestjs/microservices';
+import { Pagination, PaginationOptionsInterface } from '../paginate';
 
 @Injectable()
 export class UsersService {
@@ -13,8 +14,18 @@ export class UsersService {
     @Inject('EMAIL_SERVICE') private client: ClientProxy,
   ) {}
 
-  getAll(): Promise<User[]> {
-    return this.usersRepository.find();
+  async getAll(options: PaginationOptionsInterface): Promise<Pagination<User>> {
+    const { page, limit } = options;
+    const [results, total] = await this.usersRepository.findAndCount({
+      take: limit,
+      skip: limit * page,
+      order: { name: 'ASC' },
+    });
+
+    return new Pagination<User>({
+      results,
+      total,
+    });
   }
 
   findOne(id: string): Promise<User> {
