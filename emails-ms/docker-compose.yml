@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  users-service:
+    build:
+      context: .
+      target: development
+    container_name: mailer-service
+    command: npm run start:prod
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
