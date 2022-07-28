@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  users-service:
+    build:
+      context: .
+      target: development
+    container_name: users-service
+    command: npm run start:dev
+    ports:
+      - ${HTTP_PORT}:${HTTP_PORT}
+      - 9229:9229
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - dbcon
+networks:
+  dbcon:
+    external: true
