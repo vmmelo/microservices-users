@@ -7,9 +7,12 @@ import {
   RmqContext,
 } from '@nestjs/microservices';
 import { EmailContent } from './entities/emailContent.entity';
+import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
+  constructor(private appService: AppService) {}
+
   @MessagePattern({ cmd: 'greeting' })
   getGreetingMessage(name: string): string {
     console.log(name);
@@ -27,16 +30,16 @@ export class AppController {
     @Ctx() context: RmqContext,
   ) {
     try {
+      console.time('execution-time');
       const channel = context.getChannelRef();
       const originalMsg = context.getMessage();
-      console.time('execution-time');
-      setTimeout(() => {
-        console.log(`EMAIL ENVIADO PARA ${data?.email}`);
+      if (await this.appService.sendGreetingEmail(data?.email)) {
         channel.ack(originalMsg);
-      }, Math.floor(Math.random() * 5000));
-      console.timeEnd('execution-time');
+      }
     } catch (e) {
       console.error(e);
+    } finally {
+      console.timeEnd('execution-time');
     }
   }
 }

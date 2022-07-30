@@ -3,6 +3,7 @@
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
@@ -45,6 +46,17 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+### Environment variables
+
+To send an e-mail to the user, you need to set the following environment variables:
+
+```yaml
+NODE_ENV=production
+MAIL_USER=<your-mail-user>
+MAIL_PASSWORD=<your-mail-pass> # your mailbox password (maybe your provider has something like Gmail's app passwords that can be used here too)
+MAIL_HOST=<your-mail-host> #smtp.gmail.com
+```
+
 ## Test
 
 ```bash
@@ -60,7 +72,8 @@ $ npm run test:cov
 
 ## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If
+you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
 ## Stay in touch
 
