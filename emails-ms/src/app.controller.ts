@@ -29,10 +29,12 @@ export class AppController {
     try {
       const channel = context.getChannelRef();
       const originalMsg = context.getMessage();
+      console.time('execution-time');
       setTimeout(() => {
         console.log(`EMAIL ENVIADO PARA ${data?.email}`);
         channel.ack(originalMsg);
       }, Math.floor(Math.random() * 5000));
+      console.timeEnd('execution-time');
     } catch (e) {
       console.error(e);
     }
