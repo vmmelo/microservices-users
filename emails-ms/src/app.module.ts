@@ -12,8 +12,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     MailerModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => {
-        console.log(configService.get<string>('SMTP_USER'));
-        console.log(configService.get<string>('SMTP_PASSWORD'));
         return {
           transport: {
             host: 'smtp.gmail.com',

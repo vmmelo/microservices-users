@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  users-service:
+  mailer-service:
     build:
       context: .
       target: development
@@ -15,4 +15,4 @@ services:
       - microservices
 networks:
   microservices:
-        external: true
+    external: true

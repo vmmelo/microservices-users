@@ -15,7 +15,6 @@ export class AppController {
 
   @MessagePattern({ cmd: 'greeting' })
   getGreetingMessage(name: string): string {
-    console.log(name);
     return `Hello ${name}`;
   }
 
