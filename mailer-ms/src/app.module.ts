@@ -14,7 +14,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       useFactory: (configService: ConfigService) => {
         return {
           transport: {
-            host: 'smtp.gmail.com',
+            host: configService.get<string>('SMTP_HOST'),
             secure: false,
             auth: {
               user: configService.get<string>('SMTP_USER'),
