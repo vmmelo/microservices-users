@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: users-configmap
+data:
+  APP_SALT: $2b$10$te0zjl.x0vAOBKpYaPO8Yu
+  HTTP_PORT: '80'
+  DB_USER: postgres
+  DB_PASS: q1w2e3r4
+  DB_HOST: svc-db-users
+  DB_NAME: users
+  DB_PORT: '5432'
+  RABBITMQ_URL: amqp://guest:q1w2e3r4@svc-rabbitmq:5672

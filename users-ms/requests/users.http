@@ -1,0 +1,43 @@
+GET {{host}}/users
+Authorization: Bearer {{auth_token}}
+
+###
+
+POST {{host}}/users
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+
+{
+  "name": "Victor Miranda",
+  "email": "victor323434@gmail.com",
+  "password": "123456"
+}
+
+###
+
+GET {{host}}/users/6488a2bb-9c25-486a-addb-349b3056f695
+Authorization: Bearer {{auth_token}}
+
+###
+
+PUT {{host}}/users/6488a2bb-9c25-486a-addb-349b3056f695
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "name": "Victor Miranda de Melo"
+}
+
+###
+
+DELETE {{host}}/users/5bef232c-d667-46ae-96cd-52d048bd1c8c
+Authorization: Bearer {{auth_token}}
+
+###
+
+
+PATCH {{host}}/users/restore/6488a2bb-9c25-486a-addb-349b3056f695
+Authorization: Bearer {{auth_token}}
+
+###
