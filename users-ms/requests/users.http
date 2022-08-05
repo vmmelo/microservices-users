@@ -1,3 +1,7 @@
+GET {{host}}
+Authorization: Bearer {{auth_token}}
+
+###
 GET {{host}}/users
 Authorization: Bearer {{auth_token}}
 

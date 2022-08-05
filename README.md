@@ -3,7 +3,7 @@
 -N: max_connections; default=100
 
 ```bash
-$ docker run --name postgresql --restart=always --network=postgres-network -e POSTGRES_USER=guest -e POSTGRES_PASSWORD=guest -p 5432:5432 -v /data:/var/lib/postgresql/data -d postgres -N 500
+$ docker run --name postgresql --restart=always --network=postgres-network -e POSTGRES_DB=users -e POSTGRES_USER=guest -e POSTGRES_PASSWORD=guest -p 5432:5432 -v /data:/var/lib/postgresql/data -d postgres -N 500
 ```
 
 ## Publish docker image
