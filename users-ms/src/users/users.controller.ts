@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Inject,
   Param,
   Patch,
   Post,
@@ -12,13 +13,21 @@ import {
 import { User } from './user.entity';
 import { UsersService } from './users.service';
 import { Pagination } from '../paginate';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { Logger } from 'winston';
 
 @Controller('users')
 export class UsersController {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
+  ) {}
 
   @Get()
   async listAll(@Request() request): Promise<Pagination<User>> {
+    this.logger.info('Calling listAll()', UsersController.name);
+    this.logger.warn('Calling listAll()', UsersController.name);
+    this.logger.error('Calling listAll()', UsersController.name);
     return await this.usersService.getAll({
       limit: request.query.hasOwnProperty('limit') ? request.query.limit : 20,
       page: request.query.hasOwnProperty('page') ? request.query.page : 0,

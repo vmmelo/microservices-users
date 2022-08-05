@@ -6,12 +6,15 @@ import * as bcrypt from 'bcrypt';
 import { isUUID } from '@nestjs/common/utils/is-uuid';
 import { ClientProxy } from '@nestjs/microservices';
 import { Pagination, PaginationOptionsInterface } from '../paginate';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { Logger } from 'winston';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private usersRepository: Repository<User>,
     @Inject('EMAIL_SERVICE') private client: ClientProxy,
+    @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
   ) {}
 
   async getAll(options: PaginationOptionsInterface): Promise<Pagination<User>> {
@@ -43,6 +46,10 @@ export class UsersService {
     );
     await this.usersRepository.insert(user);
     this.client.emit('user-registered', user);
+    this.logger.info(
+      `Created user ${user?.email}. Sent user-registered to Rabbitmq`,
+      UsersService.name,
+    );
   }
 
   update(user: User): Promise<User> {
