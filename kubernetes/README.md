@@ -1,3 +1,5 @@
+# Useful k8s commands
+
 ### Apply yml
 
 ```bash
@@ -20,4 +22,10 @@ $ kubectl describe pod db-users
 
 ```bash
 $ kubectl logs mailer
+```
+
+### Logs
+
+```bash
+$ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```

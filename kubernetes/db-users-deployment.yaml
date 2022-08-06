@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-users-deployment
+spec:
+  template:
+    metadata:
+      name: db-users
+      labels:
+        app: db-users
+    spec:
+      containers:
+        - name: db-users-container
+          image: postgres:12-alpine
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: db-configmap
+  selector:
+    matchLabels:
+      app: db-users

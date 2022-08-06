@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-deployment
+spec:
+  template:
+    metadata:
+      name: users
+      labels:
+        app: users
+    spec:
+      containers:
+        - name: users-container
+          image: vmmelo1/authenticator-users-ms:latest
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: users-configmap
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3
+            initialDelaySeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 5
+            initialDelaySeconds: 3
+          resources:
+            requests:
+              cpu: 10m
+          volumeMounts:
+            - mountPath: /usr/src/app/logs
+              name: logs
+      volumes:
+        - name: logs
+          persistentVolumeClaim:
+            claimName: users-logs-pvc
+  replicas: 3
+  selector:
+    matchLabels:
+      app: users
